@@ -1,0 +1,216 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>COPSOQ II - Acesso</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;800&display=swap" rel="stylesheet">
+    <style>
+        * { box-sizing: border-box; margin: 0; padding: 0; font-family: 'Poppins', sans-serif; }
+        body { 
+            background-color: #4DE1C1; /* Fundo verde água */
+            display: flex; flex-direction: column; align-items: center; justify-content: center; min-height: 100vh; padding: 20px;
+        }
+        
+        /* Cabeçalho do App */
+        .header-app { text-align: center; margin-bottom: 20px; color: #1B2033; }
+        .icon-top { background: #E2FAF5; color: #4DE1C1; padding: 15px; border-radius: 12px; display: inline-block; margin-bottom: 15px; }
+        .icon-top svg { width: 30px; height: 30px; }
+        .header-app h2 { font-weight: 800; font-size: 22px; text-transform: uppercase; }
+
+        /* Card Principal */
+        .card { 
+            background: #FFFAF4; /* Fundo creme claro do card */
+            border: 4px solid #FF8933; /* Borda laranja */
+            border-radius: 24px; width: 100%; max-width: 500px; padding: 30px 20px; text-align: center;
+            box-shadow: 0 10px 25px rgba(0,0,0,0.1); position: relative;
+        }
+        
+        .voltar { position: absolute; top: -40px; left: 0; color: #1B2033; text-decoration: none; font-size: 14px; font-weight: 600; display: flex; align-items: center; gap: 5px; cursor: pointer;}
+        
+        .subtitle { color: #FF8933; font-size: 12px; font-weight: 800; letter-spacing: 1px; margin-bottom: 5px; text-transform: uppercase;}
+        .title-version { color: #1B2033; font-size: 14px; font-weight: 800; background: #fff; border: 1px solid #eee; padding: 8px 15px; border-radius: 8px; display: inline-block; margin-bottom: 20px; box-shadow: 0 2px 5px rgba(0,0,0,0.02);}
+        
+        .big-title { color: #FF6B00; font-size: 42px; font-weight: 800; margin-bottom: 5px; line-height: 1; }
+        .instruction { background: #FFA770; color: white; display: inline-block; padding: 6px 15px; border-radius: 20px; font-size: 12px; font-weight: 800; margin-bottom: 25px; text-transform: uppercase;}
+
+        /* Input Area */
+        .input-group { display: flex; gap: 10px; margin-bottom: 20px; }
+        .input-wrapper { flex: 1; position: relative; }
+        .input-wrapper input { 
+            width: 100%; padding: 15px 20px; border: 2px solid #00B875; border-radius: 12px;
+            font-size: 20px; font-weight: 600; color: #1B2033; text-align: center; letter-spacing: 3px; outline: none;
+        }
+        .input-wrapper input::placeholder { color: #ccc; letter-spacing: normal; font-size: 16px;}
+        .input-wrapper .check-icon { position: absolute; right: 15px; top: 50%; transform: translateY(-50%); color: #00B875; font-size: 20px;}
+        
+        .btn-validar { 
+            background: #FFB370; color: white; border: none; border-radius: 12px; padding: 0 25px;
+            font-size: 16px; font-weight: 800; cursor: pointer; transition: 0.2s; text-transform: uppercase;
+        }
+        .btn-validar:hover { background: #FF9840; }
+        .btn-validar:disabled { background: #ccc; cursor: not-allowed; }
+
+        /* Mensagens de Status */
+        .status-msg { 
+            padding: 15px; border-radius: 12px; font-weight: 800; font-size: 14px; margin-bottom: 15px; display: none; text-transform: uppercase; display: flex; align-items: center; justify-content: center; gap: 10px;
+        }
+        .status-success { background: #00995E; color: white; }
+        .status-error { background: #E74C3C; color: white; }
+
+        /* Botões de Setor (Aparecem após validar) */
+        .setor-container { display: none; flex-direction: column; gap: 10px; margin-top: 20px; }
+        .setor-title { font-size: 14px; color: #1B2033; font-weight: 600; margin-bottom: 5px; }
+        .btn-setor {
+            background: #00C885; color: white; border: none; padding: 15px; border-radius: 12px;
+            font-size: 16px; font-weight: 800; cursor: pointer; transition: 0.2s; text-transform: uppercase;
+            display: flex; align-items: center; justify-content: center; gap: 10px;
+        }
+        .btn-setor:hover { background: #00A66E; transform: translateY(-2px); }
+
+        /* Rodapé */
+        .footer-info { margin-top: 30px; font-size: 12px; color: #2C6B5E; font-weight: 600; text-align: center; }
+        .footer-admin { display: block; margin-top: 10px; color: rgba(255,255,255,0.7); font-size: 10px; text-decoration: none; font-weight: 800; text-transform: uppercase; letter-spacing: 1px;}
+    </style>
+</head>
+<body>
+
+    <div class="header-app">
+        <div class="icon-top">
+            <svg fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M9 2a1 1 0 00-.894.553L7.382 4H4a1 1 0 000 2v10a2 2 0 002 2h8a2 2 0 002-2V6a1 1 0 100-2h-3.382l-.724-1.447A1 1 0 0011 2H9zM7 8a1 1 0 012 0v6a1 1 0 11-2 0V8zm5-1a1 1 0 00-1 1v6a1 1 0 102 0V8a1 1 0 00-1-1z" clip-rule="evenodd"></path></svg>
+        </div>
+        <h2>Questionário Psicossocial Copsoq II</h2>
+    </div>
+
+    <div class="card">
+        <a href="#" class="voltar">← VOLTAR PARA SELEÇÃO</a>
+        
+        <div class="subtitle">Questionário Selecionado:</div>
+        <div class="title-version">COPSOQ II — VERSÃO CURTA (41 ITENS) - (POR SETOR)</div>
+        
+        <h1 class="big-title">CÓDIGO</h1>
+        <div class="instruction">Insira o código da empresa</div>
+
+        <div class="input-group">
+            <div class="input-wrapper">
+                <input type="text" id="codigoInput" placeholder="EX: 123456" autocomplete="off">
+                <span class="check-icon" id="checkIcon" style="display:none;">✔</span>
+            </div>
+            <button class="btn-validar" id="btnValidar" onclick="validarCodigo()">Validar</button>
+        </div>
+
+        <div id="msgSucesso" class="status-msg status-success">
+            <svg width="20" height="20" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>
+            Código validado com sucesso!
+        </div>
+        <div id="msgErro" class="status-msg status-error"></div>
+
+        <div id="areaSetores" class="setor-container">
+            <div class="setor-title" id="nomeEmpresaValidada"></div>
+            <div id="listaSetores"></div>
+        </div>
+    </div>
+
+    <div class="footer-info">
+        ⓘ Os dados coletados são confidenciais e utilizados apenas para fins estatísticos.
+        <a href="admin.html" class="footer-admin">Acesso Administrativo</a>
+    </div>
+
+    <script>
+        // ==============================================================
+        // CONFIGURAÇÕES DO SISTEMA (COLE AQUI SUAS URLs E IDs REAIS)
+        // ==============================================================
+        const WEB_APP_URL = "SUA_URL_DO_WEB_APP_AQUI"; // Url do Apps Script
+        const FORM_BASE_URL = "https://docs.google.com/forms/d/e/1FAIpQLSdaXECEGnJ5QffHIoB3nGj1a0NuYHloAb-65oQrJYemcPdM5Q/viewform";
+        const ENTRY_ID_EMPRESA = "entry.2021106096";  
+        const ENTRY_ID_SETOR = "entry.1048242008";
+        // ==============================================================
+
+        // Verifica se já veio código na URL (leitura de QR Code)
+        window.onload = function() {
+            const parametrosURL = new URLSearchParams(window.location.search);
+            const codigoURL = parametrosURL.get('codigo');
+            if (codigoURL) {
+                document.getElementById('codigoInput').value = codigoURL;
+                validarCodigo(); // Auto-valida se vier do QR Code
+            }
+        };
+
+        async function validarCodigo() {
+            const codigo = document.getElementById('codigoInput').value.trim();
+            const btn = document.getElementById('btnValidar');
+            const msgErro = document.getElementById('msgErro');
+            const msgSucesso = document.getElementById('msgSucesso');
+            const areaSetores = document.getElementById('areaSetores');
+            const checkIcon = document.getElementById('checkIcon');
+
+            // Reset UI
+            msgErro.style.display = 'none';
+            msgSucesso.style.display = 'none';
+            areaSetores.style.display = 'none';
+            checkIcon.style.display = 'none';
+
+            if (!codigo) {
+                mostrarErro("Por favor, digite um código.");
+                return;
+            }
+
+            btn.innerText = "Aguarde...";
+            btn.disabled = true;
+
+            try {
+                const res = await fetch(`${WEB_APP_URL}?action=validar_codigo&codigo=${codigo}`);
+                const data = await res.json();
+
+                if (data.status === "error") {
+                    mostrarErro(data.message);
+                } else {
+                    // Sucesso!
+                    document.getElementById('codigoInput').style.borderColor = "#00B875";
+                    checkIcon.style.display = 'block';
+                    msgSucesso.style.display = 'flex';
+                    
+                    document.getElementById('nomeEmpresaValidada').innerText = `Empresa: ${data.empresa} - Selecione seu setor:`;
+                    
+                    // Monta os botões dos setores
+                    const divSetores = document.getElementById('listaSetores');
+                    divSetores.innerHTML = ""; // limpa anteriores
+                    
+                    if (data.setores.length === 0) {
+                        divSetores.innerHTML = "<p style='color:#E74C3C; font-size:12px;'>Nenhum setor cadastrado no sistema para esta empresa.</p>";
+                    } else {
+                        data.setores.forEach(setor => {
+                            const b = document.createElement('button');
+                            b.className = 'btn-setor';
+                            b.innerHTML = `
+                                Abrir Formulário - ${setor} 
+                                <svg width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14"></path></svg>
+                            `;
+                            b.onclick = () => redirecionarParaForms(data.empresa, setor);
+                            divSetores.appendChild(b);
+                        });
+                    }
+                    areaSetores.style.display = 'flex';
+                }
+            } catch (e) {
+                mostrarErro("Erro de conexão. Tente novamente.");
+            } finally {
+                btn.innerText = "Validar";
+                btn.disabled = false;
+            }
+        }
+
+        function mostrarErro(texto) {
+            const msgErro = document.getElementById('msgErro');
+            document.getElementById('codigoInput').style.borderColor = "#E74C3C";
+            msgErro.innerText = texto;
+            msgErro.style.display = 'block';
+        }
+
+        function redirecionarParaForms(empresa, setor) {
+            const urlFinal = `${FORM_BASE_URL}?usp=pp_url&${ENTRY_ID_EMPRESA}=${encodeURIComponent(empresa)}&${ENTRY_ID_SETOR}=${encodeURIComponent(setor)}`;
+            window.location.href = urlFinal;
+        }
+    </script>
+</body>
+</html>
